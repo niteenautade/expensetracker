@@ -3,8 +3,8 @@
     <hr>
     <!--VIEW-->
     <div>
-      <h1>View Expenses</h1>
-      <div class="tablemargin" id="mytable">
+      <h1 ng-click="showViewFeature()">View Expenses</h1>
+      <div class="tablemargin" id="tbl_view" ng-show="show_viewfeature">
         <table class="table table-striped">
           <tr>
             <th class="col-md-2 text-center">ID</th>
@@ -29,94 +29,103 @@
       <hr>
     <!--Add -->
     <div>
-      <h1>Add Expenses</h1>
-      <form name="myform" class="row">
-        <div class="col-md-8 col-xs-12 padding-bottom-xs">
-          <input type="text" ng-model="itemName" class="form-control" name="itemName" placeholder="Enter Item Name" required>
+      <h1 ng-click="showAddFeature()">Add Expenses</h1>
+      <div ng-show="show_addfeature">
+        <form name="myform" class="row">
+          <div class="col-md-8 col-xs-12 padding-bottom-xs">
+            <input type="text" ng-model="itemName" class="form-control" name="itemName" id="itemName" placeholder="Enter Item Name" required>
+          </div>
+          <div class="col-md-2 col-xs-12 padding-bottom-xs">
+            <input type="number" step="any" ng-model="itemPrice" class="form-control" name="itemPrice" id="itemPrice" placeholder="Enter Item Price" required onkeydown="if (event.keyCode == 13)document.getElementById('btnAddItem').click()">
+          </div>
+          <div class="col-md-2 col-xs-12 text-xs-center padding-bottom-xs">
+            <button ng-click="addItem(itemName,itemPrice)" class="btn btn-primary" ng-disabled="myform.itemName.$invalid || myform.itemPrice.$invalid" id="btnAddItem"><i class="fa fa-plus" aria-hidden="true"></i> Add Item</button>      
+          </div>
+        </form>
+        
+        <div class="tablemargin" id="mytable">
+          <table class="table table-striped">
+            <tr>
+              <th class="col-md-8 text-center">Item</th>
+              <th class="col-md-2 text-center">Price</th> 
+              <th class="col-md-2 text-center">Action</th>  
+            </tr>
+            
+            <tr  ng-repeat="(a,b) in list" >
+             <td style="padding-left: 50px;">{{a}}</td>
+             <td class="text-center">{{b}}</td>
+             <td class="text-center"><button class="btn btn-default" ng-click="removeItem(a)"><i class="fa fa-minus" aria-hidden="true"></i> Remove</button></td>
+            </tr>  
+          </table>
         </div>
-        <div class="col-md-2 col-xs-12 padding-bottom-xs">
-          <input type="number" step="any" ng-model="itemPrice" class="form-control" name="itemPrice" placeholder="Enter Item Price" required onkeydown="if (event.keyCode == 13)document.getElementById('btnAddItem').click()">
-        </div>
-        <div class="col-md-2 col-xs-12 text-xs-center padding-bottom-xs">
-          <button ng-click="addItem(itemName,itemPrice)" class="btn btn-primary" ng-disabled="myform.itemName.$invalid || myform.itemPrice.$invalid" id="btnAddItem"><i class="fa fa-plus" aria-hidden="true"></i> Add Item</button>      
-        </div>
-      </form>
-      
-      <div class="tablemargin" id="mytable">
-        <table class="table table-striped">
-          <tr>
-            <th class="col-md-8 text-center">Item</th>
-            <th class="col-md-2 text-center">Price</th> 
-            <th class="col-md-2 text-center">Action</th>  
-          </tr>
-          
-          <tr  ng-repeat="(a,b) in list" >
-           <td style="padding-left: 50px;">{{a}}</td>
-           <td class="text-center">{{b}}</td>
-           <td class="text-center"><button class="btn btn-default" ng-click="removeItem(a)"><i class="fa fa-minus" aria-hidden="true"></i> Remove</button></td>
-          </tr>  
-        </table>
-      </div>
-      
-      <p style="padding-left: 15px;">
-        <b>Total Items To Be Added = {{ noOfElements }} </b>
-      </p>
+        
+        <p style="padding-left: 15px;">
+          <b>Total Items To Be Added = {{ noOfElements }} </b>
+        </p>
 
-      <div class="row">
-        <div class="col-md-8 col-xs-6 text-center">
-          <button class="btn btn-success" ng-disabled="noOfElements<=0" ng-click="loadDoc()"><i class="fa fa-share" aria-hidden="true"></i> Submit</button>
+        <div class="row">
+          <div class="col-md-8 col-xs-6 text-center">
+            <button class="btn btn-success" ng-disabled="noOfElements<=0" ng-click="submitToDatabase()"><i class="fa fa-share" aria-hidden="true"></i> Submit</button>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-2 col-xs-6 text-center">
+            <button class="btn btn-danger" ng-click="clearAll()" ng-show="noOfElements>0"><i class="fa fa-trash" aria-hidden="true"></i> Clear List</button>
+          </div>
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-2 col-xs-6 text-center">
-          <button class="btn btn-danger" ng-click="clearAll()" ng-show="noOfElements>0"><i class="fa fa-trash" aria-hidden="true"></i> Clear List</button>
+        <div style="margin-top: 20px;" class="text-center" ng-show="var_show==true">
+          <p style="color: green;font-style: italic;">Status:<span id="submit_status"></span></p>
         </div>
-      </div>
-      <div style="margin-top: 20px;" class="text-center" ng-show="var_show==true">
-        <p style="color: green;font-style: italic;">Status:<span id="submit_status"></span></p>
       </div>
     </div>
 
     <hr>
     <!--Update -->
     <div>
-      <h1>Update Expenses</h1>
-      <form name="myform1" class="row">
-        <div class="col-md-8 padding-bottom-xs">
-          <input type="text" ng-model="updateItem" class="form-control" name="updateItem" placeholder="Enter Item Name" required>
+      <h1 ng-click="showUpdateFeature()">Update Expenses</h1>
+      <div ng-show="show_updatefeature">
+        <form name="myform1" class="row">
+          <div class="col-md-8 padding-bottom-xs">
+            <input type="text" ng-model="updateItem" class="form-control" id="updateItem" name="updateItem" placeholder="Enter Item Name" required>
+          </div>
+          <div class="col-md-2 padding-bottom-xs">
+            <input type="number" step="any" ng-model="updatePrice" class="form-control" id="updatePrice" name="updatePrice" placeholder="Enter Price" required onkeydown="if (event.keyCode == 13)
+                            updateItemFunction(updateItem,updatePrice)">
+          </div>
+          <div class="col-md-2 text-xs-center padding-bottom-xs">
+            <button ng-click="updateItemFunction(updateItem,updatePrice)" class="btn btn-primary" ng-disabled="myform1.updateItem.$invalid || myform1.updatePrice.$invalid" id="btnUpdateItem">Update Item</button>      
+          </div>
+        </form>
+  
+        <div style="margin-top: 20px;" class="text-center">
+          <p style="color: green;font-style: italic;">Status:<span id="update_status"></span></p>
         </div>
-        <div class="col-md-2 padding-bottom-xs">
-          <input type="number" step="any" ng-model="updatePrice" class="form-control" name="updatePrice" placeholder="Enter Price" required onkeydown="if (event.keyCode == 13)
-                          updateItemFunction(updateItem,updatePrice)">
-        </div>
-        <div class="col-md-2 text-xs-center padding-bottom-xs">
-          <button ng-click="updateItemFunction(updateItem,updatePrice)" class="btn btn-primary" ng-disabled="myform1.itemName.$invalid || myform1.itemPrice.$invalid" id="btnUpdateItem">Update Item</button>      
-        </div>
-      </form>
-
-      <div style="margin-top: 20px;" class="text-center">
-        <p style="color: green;font-style: italic;">Status:<span id="update_status"></span></p>
       </div>
     </div>
 
-      <h1>Delete Expenses</h1>      
-        <div class="row">
-          <h3 class="text-center">A. Delete items individually</h3>
-          <div class="col-md-10 padding-bottom-xs">
-            <input type="text" ng-model="del_item" id="del_item" placeholder="Enter name of item to be deleted" class="form-control">
+    <hr>
+    <!--Delete -->
+    <div>
+      <h1 ng-click="showDeleteFeature()">Delete Expenses</h1>      
+        <div ng-show="show_deletefeature">
+          <div class="row">
+            <h3 class="text-center">A. Delete items individually</h3>
+            <div class="col-md-10 padding-bottom-xs">
+              <input type="text" ng-model="del_item" id="del_item" placeholder="Enter name of item to be deleted" class="form-control">
+            </div>
+            <div class="col-md-2 padding-bottom-xs text-xs-center">
+              <button class="btn btn-danger" ng-click="delete(del_item)"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
+            </div>
+          </div>   
+          <hr>
+          <h3 class="text-center">B. Delete all items in one click</h3> 
+          <div style="padding-top: 10px;" class="text-xs-center">
+            <button class="btn btn-danger center-block" ng-click="deleteall()">Delete all items</button>
           </div>
-          <div class="col-md-2 padding-bottom-xs text-xs-center">
-            <button class="btn btn-danger" ng-click="delete(del_item)"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
+          
+          <div style="margin-top: 20px;" class="text-center">
+            <p style="color: green;font-style: italic;">Status:<span id="delete_status"></span></p>
           </div>
-        </div>   
-        <hr>
-        <h3 class="text-center">B. Delete all items in one click</h3> 
-        <div style="padding-top: 10px;" class="text-xs-center">
-          <button class="btn btn-danger center-block" ng-click="deleteall()">Delete all items</button>
         </div>
-        
-        <div style="margin-top: 20px;" class="text-center">
-          <p style="color: green;font-style: italic;">Status:<span id="delete_status"></span></p>
-        </div>
-  
+     </div>
 </div>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
