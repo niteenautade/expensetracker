@@ -1,0 +1,155 @@
+html {
+  height: 100%;
+}
+body {
+  padding: 0;
+  height: 100%;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: rgba(221, 4, 73, 0.89);
+    border-color: #d43f3a;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #dd0449;
+    border-color: #d43f3a;
+}
+.tablemargin{
+margin-top: 20px;
+padding-left: 15px;
+padding-right: 15px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #FFF;
+    background-color: transparent;
+}
+.navback:hover{
+  font-weight: bold;
+  font-size: 17px;
+}
+.navbar-default .navbar-nav > li > a {
+    color: black;
+    font-weight: bold;
+}
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+.navbar-default{
+  background-color: #00A63F;
+}
+
+.row{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.navbar{
+  margin-bottom: 0px;
+}
+
+.btn-success{
+  background-color: #00A63F;
+}
+.mycontainer{
+  padding-top: 20px;
+  margin-bottom: 20px;
+  margin:0;
+  
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+  margin-top: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  background-color: black;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 90%;
+    padding: 20px 20px 20px 20px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 0px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+  
+}
+
+@media screen and (max-width: 768px){
+  .text-xs-center{
+    text-align: center;
+  }
+  .padding-bottom-xs{
+    padding-bottom: 10px;
+  }
+}
