@@ -59,6 +59,13 @@ padding-right: 15px;
   
 }
 
+.android_icon{
+  width:25%;
+}
+.android_icon:hover{
+  width:28%;
+  opacity:0.7;
+}
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;

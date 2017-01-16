@@ -24,10 +24,10 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/download_apk', {
+        templateUrl: 'views/download_apk.html',
+        controller: 'ApkCtrl',
+        controllerAs: 'apk'
       });
       
   });
