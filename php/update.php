@@ -4,7 +4,8 @@ $username = "root";
 $password = "";
 $dbname = "db_expensetracker";
 
-$str_json = file_get_contents('php://input');
+$str_json = $_POST['item_to_be_updated'];
+$loginid = $_POST['loginid'];
 $response = json_decode($str_json,true);
 
 $counter_failed=0;

@@ -5,6 +5,7 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <meta name="google-signin-client_id" content="575385968048-6bmqde5r224trdfhr2m20iprnbht6fic.apps.googleusercontent.com">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -19,7 +20,6 @@
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
 
     <!-- Add your site or application content here -->
     <div class="header row">
@@ -45,6 +45,19 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div ng-controller="MainCtrl" >
+    	<div class="row" style="margin-top: 10px;margin-bottom: 10px;">
+    		<div class="col-md-4"></div>
+	    	<div class="col-md-4">
+	    		<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	    	</div>
+	    	<div class="col-md-4">
+	    		<a href="#" onclick="signOut();">Sign out</a>
+	    	</div>
+		</div>
+    	
     </div>
 
     <div class="row">
@@ -85,6 +98,8 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     <!-- endbower -->
     <!-- endbuild -->
 

@@ -6,7 +6,7 @@ $dbname = "db_expensetracker";
 
 $str_json = file_get_contents('php://input');
 $response = json_decode($str_json,true);
-
+$loginid = $response['loginid'];
 $counter_failed=0;
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -16,14 +16,16 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 	}
 foreach($response as $x => $x_value) {
     
-
-	$sql = "INSERT INTO tbl_expenses (item , price) VALUES ('$x','$x_value')";
-
-	if ($conn->query($sql) === TRUE) {
-	   
-	} else {
-		$counter_failed++;
-	    echo "Error: " . $conn->error;
+	if($x != "loginid")
+	{
+		$sql = "INSERT INTO tbl_expenses (item , price,userID) VALUES ('$x','$x_value','$loginid')";
+	
+		if ($conn->query($sql) === TRUE) {
+		   
+		} else {
+			$counter_failed++;
+		    echo "Error: " . $conn->error;
+		}
 	}
 	
 }

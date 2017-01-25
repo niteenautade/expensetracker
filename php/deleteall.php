@@ -4,8 +4,8 @@ $username = "root";
 $password = "";
 $dbname = "db_expensetracker";
 
-$item = file_get_contents('php://input');
-
+$loginid = $_POST['loginid'];
+echo "login:".$loginid;
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // sql to delete a record
-$sql = "TRUNCATE table tbl_expenses";
+$sql = "DELETE FROM tbl_expenses WHERE UserID='$loginid'";
 
 if ($conn->query($sql) === TRUE) {
     echo "All Records deleted successfully";
