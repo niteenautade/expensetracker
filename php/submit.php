@@ -4,9 +4,12 @@ $username = "root";
 $password = "";
 $dbname = "db_expensetracker";
 
-$str_json = file_get_contents('php://input');
+$str_json = $_POST['list'];
 $response = json_decode($str_json,true);
-$loginid = $response['loginid'];
+$loginid = $_POST['loginid'];
+$name = $_POST['name'];
+$surname = $_POST['surname'];
+$emailid = $_POST['emailid'];
 $counter_failed=0;
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -15,17 +18,13 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 	    die("Connection failed: " . $conn->connect_error);
 	}
 foreach($response as $x => $x_value) {
-    
-	if($x != "loginid")
-	{
-		$sql = "INSERT INTO tbl_expenses (item , price,userID) VALUES ('$x','$x_value','$loginid')";
-	
-		if ($conn->query($sql) === TRUE) {
-		   
-		} else {
-			$counter_failed++;
-		    echo "Error: " . $conn->error;
-		}
+    $sql = "INSERT INTO tbl_expenses (item , price,userID ,Name , Surname , emailid) VALUES ('$x','$x_value','$loginid', '$name', '$surname', '$emailid')";
+
+	if ($conn->query($sql) === TRUE) {
+	   
+	} else {
+		$counter_failed++;
+	    echo "Error: " . $conn->error;
 	}
 	
 }

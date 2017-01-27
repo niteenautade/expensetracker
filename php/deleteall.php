@@ -5,7 +5,6 @@ $password = "";
 $dbname = "db_expensetracker";
 
 $loginid = $_POST['loginid'];
-echo "login:".$loginid;
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection

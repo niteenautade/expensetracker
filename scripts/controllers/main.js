@@ -33,10 +33,14 @@ angular.module('expensetrackerApp')
         $scope.user = $window.profile;
 
         $scope.allfeatures = false;
-    if($scope.user == null){
-      $scope.allfeatures = false;
-    }
-    else $scope.allfeatures = true;
+        if($scope.user == null){
+          $scope.allfeatures = false;
+          $scope.signedin = false;
+        }
+        else{
+          $scope.allfeatures = true;
+          $scope.signedin = true;
+        }
 
         $timeout(countUp, 1000);
     }
@@ -74,7 +78,6 @@ angular.module('expensetrackerApp')
     $scope.retrievelist = {};
     $scope.submitToDatabase = function() {
       $scope.show_viewfeature = true;
-      $scope.list['loginid']=$scope.user.getId();
       var json_string = JSON.stringify($scope.list);
       console.log("string"+json_string);
       var xhttp = new XMLHttpRequest();
@@ -88,7 +91,7 @@ angular.module('expensetrackerApp')
       };
       xhttp.open("POST", "php/submit.php", true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send(json_string);
+      xhttp.send("list="+json_string+"&loginid="+$scope.user.getId()+"&name="+$scope.user.ofa+"&surname="+$scope.user.wea+"&emailid="+$scope.user.getEmail());
       
       $scope.var_show = true;
 
